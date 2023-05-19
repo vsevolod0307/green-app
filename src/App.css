@@ -7,6 +7,16 @@
   pointer-events: none;
 }
 
+.whatsapp {
+  background-color: #e2e2e2;
+  display: grid;
+  grid-template-columns: 400px 1fr;
+  min-height: 10vh;
+  margin: 10px;
+  border-radius: 12px;
+  border: none;
+}
+
 @media (prefers-reduced-motion: no-preference) {
   .App-logo {
     animation: App-logo-spin infinite 20s linear;
