@@ -1,0 +1,31 @@
+.chat {
+    padding: 8px;
+    display: grid;
+    grid-template-rows: 1fr auto;
+}
+.chat-action input {
+    width: 100%;
+    padding: 6px 10px;
+    border-radius: 12px;
+    border: none;
+    outline: none;
+}
+.chat-action {
+    display: flex;
+    gap: 8px;
+}
+.chat-action button {
+    border: none;
+    border-radius: 12px;
+    padding: 6px 12px;
+    cursor: pointer;
+}
+.chat-action button:hover {
+    background-color: black;
+    color: #fff;
+}
+.chat-box {
+    background-color: #fff;
+    border-radius: 12px;
+    margin-bottom: 8px;
+}

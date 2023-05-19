@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import Autentification from "../../service/auth";
+import "./chat.css";
 
 export default function Chat() {
     const [message, setMessage] = useState("");
