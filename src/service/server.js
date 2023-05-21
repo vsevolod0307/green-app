@@ -3,6 +3,7 @@ import { Component } from "react";
 export default class Server extends Component {
 
     isAuth = false;
+    contactInfo = null;
 
     async login(apiTokenInstance, idInstance) {
         await fetch(`https://api.green-api.com/waInstance${idInstance}/getStateInstance/${apiTokenInstance}`, {
@@ -19,5 +20,13 @@ export default class Server extends Component {
                 chatId, message
             })
         })
+    }
+
+    async getContactInfo(apiTokenInstance, idInstance, chatId) {
+        await fetch(`https://api.green-api.com/waInstance${idInstance}/getContactInfo/${apiTokenInstance}`, {
+            method: "POST",
+            body: JSON.stringify({chatId})
+        }).then(res => res.json())
+        .then(json => this.contactInfo = json)
     }
 }

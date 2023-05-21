@@ -5,14 +5,14 @@ import "./chat.css";
 export default function Chat() {
     const [message, setMessage] = useState("");
 
-    const a = new Server();
+    const server = new Server();
 
     const onInput = (e) => {
         setMessage(message => message = e.target.value)
     }
 
-    const onMessage = () => {
-        a.sendMessage("79513817068@c.us", message);
+    const onMessage = (chatId) => {
+        server.sendMessage(chatId, message);
     }
 
     return (

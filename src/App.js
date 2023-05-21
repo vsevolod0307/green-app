@@ -4,16 +4,8 @@ import Header from './components/Header/header';
 import Sidebar from './components/Sidebar/sidebar';
 import Auth from './components/Auth/auth';
 import { BrowserRouter as Router, Route, Routes, Navigate } from "react-router-dom";
-import Server from "./service/server";
-import { useEffect, useState } from 'react';
 
 function App() {
-  const [auth, setAuth] = useState(false);
-  const server = new Server();
-
-  useEffect(() => {
-    setAuth(server.isAuth)
-  })
   
   return (
     <>
@@ -21,7 +13,7 @@ function App() {
         <Routes>
           <Route
             path='/'
-            element={auth ? <Navigate to="/home"/> : <Navigate to="/auth"/>}/>
+            element={<Navigate to="/auth" replace={true}/>}/>
           <Route 
             path='/auth'
             element={<Auth/>}/>
