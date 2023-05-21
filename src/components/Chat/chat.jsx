@@ -8,7 +8,9 @@ export default function Chat(props) {
     const server = new Server();
 
     useEffect(() => {
-        server.getChatHistory(props.contactInfo.chatId);
+        if(props.contactInfo.chatId) {
+            server.getChatHistory(props.contactInfo.chatId);
+        }
     }, [props.contactInfo])
 
     const onInput = (e) => {
@@ -16,8 +18,12 @@ export default function Chat(props) {
     }
 
     const updateBoxMessages = () => {
-
+        console.log(server.chatHistory)
     }
+
+    useEffect(() => {
+        updateBoxMessages()
+    })
 
     const onMessage = () => {
         server.sendMessage(props.contactInfo.chatId, message);
