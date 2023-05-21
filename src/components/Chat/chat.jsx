@@ -1,11 +1,11 @@
 import React, { useState } from "react";
-import Autentification from "../../service/auth";
+import Server from "../../service/server";
 import "./chat.css";
 
 export default function Chat() {
     const [message, setMessage] = useState("");
 
-    const a = new Autentification();
+    const a = new Server();
 
     const onInput = (e) => {
         setMessage(message => message = e.target.value)
