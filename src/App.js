@@ -4,8 +4,14 @@ import Header from './components/Header/header';
 import Sidebar from './components/Sidebar/sidebar';
 import Auth from './components/Auth/auth';
 import { BrowserRouter as Router, Route, Routes, Navigate } from "react-router-dom";
+import { useEffect, useState } from 'react';
 
 function App() {
+  const [contactInfo, setContactInfo] = useState("")
+  
+  const updateContactInfo = (contact) => {
+    setContactInfo(contact)
+  }
   
   return (
     <>
@@ -24,8 +30,8 @@ function App() {
             path='/chat' 
             element={
               <div className='whatsapp'>
-                <Sidebar/>
-                <Chat/>
+                <Sidebar updateContactInfo={updateContactInfo} />
+                <Chat contactInfo={contactInfo}/>
               </div>
             }/>
         </Routes>

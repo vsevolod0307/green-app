@@ -32,7 +32,7 @@ export default function Auth(props) {
 
     return (
         <>
-        {auth ? <Navigate to="/home"/>
+        {auth ? <Navigate to="/chat"/>
         :
         <div className="auth">
             <form className="auth-form" onSubmit={onValueAuth}>
