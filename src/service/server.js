@@ -53,11 +53,10 @@ export default class Server extends Component {
     async getChatHistory(chatId) {
         await fetch(`https://api.green-api.com/waInstance${this.idInstance}/GetChatHistory/${this.apiTokenInstance}`, {
             method: "POST",
-            body: JSON.stringify({chatId, 
-                count: 12
-            })
+            body: JSON.stringify({chatId})
         }).then(res => res.json())
-        .then(async json => this.chatHistory = await json)
+        .then(json => this.chatHistory = json)
+        console.log(this.chatHistory)
     }
 
     async getContactInfo(chatId) {

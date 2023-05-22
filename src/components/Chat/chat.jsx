@@ -3,31 +3,47 @@ import Server from "../../service/server";
 import "./chat.css";
 
 export default function Chat(props) {
-    const [message, setMessage] = useState("");
-
     const server = new Server();
+    const [message, setMessage] = useState("");
+    const [history, setHistory] = useState([]);
 
     useEffect(() => {
         if(props.contactInfo.chatId) {
-            server.getChatHistory(props.contactInfo.chatId);
+            async function chatHistory() {
+                await server.getChatHistory(props.contactInfo.chatId)
+            }
+            
+            chatHistory()
+            .then(() => setHistory(server.chatHistory))
+            .catch(console.error)
         }
     }, [props.contactInfo])
+
+    useEffect(() => {
+        server.ReceiveNotification();
+    })
+
+    useEffect(() => {
+        console.log("rdhh")
+    }, [history])
 
     const onInput = (e) => {
         setMessage(message => message = e.target.value)
     }
 
-    const updateBoxMessages = () => {
-        console.log(server.chatHistory)
+    const onMessage = async () => {
+        setHistory(history => [{textMessage: message, type: "outgoing"}, ...history])
+        await server.sendMessage(props.contactInfo.chatId, message);
+
+        setMessage("");
     }
 
-    useEffect(() => {
-        updateBoxMessages()
+    const boxMessages = history.map(message => {
+        return (
+            message.textMessage ?
+            <div className={message.type === "outgoing" ? "message right" : "message left"} key={message.idMessage}>{message.textMessage}</div> : ""
+        )
     })
-
-    const onMessage = () => {
-        server.sendMessage(props.contactInfo.chatId, message);
-    }
 
     return (
         <>
@@ -36,7 +52,9 @@ export default function Chat(props) {
                     <img src={props.contactInfo.avatar} className="chat-avatar"/>
                     <div className="chat-contact-name">{props.contactInfo.name}</div>
                 </div>
-                <div className="chat-box"></div>
+                <div className="chat-wrap">
+                    <div className="chat-box">{boxMessages}</div>
+                </div>
                 <div className="chat-action">
                     <input type="text" value={message} onChange={onInput} />
                     <button className="chat-btn" onClick={onMessage}>send</button>

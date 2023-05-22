@@ -28,7 +28,7 @@ export default function Sidebar(props) {
             <aside>
                 <form action="" onSubmit={onSearchContact}>
                     <input type="text" placeholder="example 79992422143" value={phone} onChange={onValue} />
-                    <button type="submiy">search</button>
+                    <button type="submit">search</button>
                 </form>
             </aside>
         </>
